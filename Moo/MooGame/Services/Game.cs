@@ -1,12 +1,8 @@
 using CleanCodeGaming.Interfaces;
-using CleanCodeGaming.Models;
+using System.Text.RegularExpressions;
 
 namespace CleanCodeGaming.Services;
 
-//Bug 1: Right now you can guess four of the same numbers,
-//and it will show one bull and three cows if that number is one of the correct numbers
-//Bug 2: Right now if you guess wrong more than once the console will repeat that number
-//Bug 3: No error handling when it comes to making a guess with other than numbers example characters
 //Bug 4: Fix when answering continue or not at the end of the game
 
 public class Game : IGame
@@ -34,19 +30,18 @@ public class Game : IGame
 		{
 			string goal = _numberGenerator.GenerateGoalNumber();
 
-			_ui.WriteLine("\nNew game:\nFor practice, number is: " + goal + "\n");
+			_ui.WriteLine("\nNew game (for practice, your number is " + goal + "):\n");
 
-			string guess = _ui.ReadLine();
-			int nGuess = 1;
+			string guess = GetValidGuess();
+            int nGuess = 1;
 			string bbcc = CheckBC(goal, guess);
 			_ui.WriteLine(bbcc + "\n");
 
 			while (bbcc != "BBBB,")
 			{
 				nGuess++;
-				guess = _ui.ReadLine();
-				_ui.WriteLine(guess + "\n");
-				bbcc = CheckBC(goal, guess);
+				guess = GetValidGuess();
+                bbcc = CheckBC(goal, guess);
 				_ui.WriteLine(bbcc + "\n");
 			}
 
@@ -55,16 +50,41 @@ public class Game : IGame
             _leaderboard.SaveResult(_name, nGuess);
 			_leaderboard.ShowTopList();
 
-            _ui.WriteLine("\nDo you wish to continue?");
+            _ui.WriteLine("\nDo you wish to continue? (y/n)?");
 
             string answer = _ui.ReadLine();
-			playOn = answer != null && answer != "" && answer.Substring(0, 1).ToLower() != "n";
+			playOn = answer != null && answer != "" && answer.Substring(0, 1).ToLower() != "n"; //inte tydligt nog
 			Console.Clear();
 
         }
 	}
+    private string GetValidGuess()
+    {
+        while (true)
+        {
+            _ui.WriteLine("Enter your guess: ");
+            string guess = _ui.ReadLine();
 
-	public string CheckBC(string goal, string guess)
+            if (IsValidGuess(guess))
+            {
+                return guess;
+            }
+            else
+            {
+                _ui.WriteLine("\nInvalid input. Please enter exactly 4 unique digits.");
+            }
+        }
+    }
+
+    //Two way validation:
+    //Regex to validate the user's input is exactly 4 digits long (with no other characters involved)
+    //Distinct and Count validates that the input is 4 digits with unique numbers thus making sure no number is repeated
+    private bool IsValidGuess(string guess)
+    {
+        return Regex.IsMatch(guess, @"^\d{4}$") && guess.Distinct().Count() == 4; 
+    }
+
+    public string CheckBC(string goal, string guess)
 	{
 		int cows = 0, bulls = 0;
 		guess += "    "; // if player entered less than 4 chars
