@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="MooGame\Interfaces\" />
+    <Folder Include="MooGame\Models\" />
+    <Folder Include="MooGame\Services\" />
+    <Folder Include="MooGame\Tests\" />
+  </ItemGroup>
+
 </Project>
