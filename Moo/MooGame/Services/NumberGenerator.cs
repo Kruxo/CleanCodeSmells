@@ -2,9 +2,10 @@ using CleanCodeGaming.Interfaces;
 
 namespace CleanCodeGaming.Services;
 
-public class NumberGenerator : IGenerateNumber
+public class NumberGenerator : IGenerateNumber //Maybe change the class to GoalGenerator and method to NumberGenerator? Update: Keep it as it is in case future games need this class
 {
-	public string GenerateGoalNumber()
+    //Generates random digits up to 4 and adds it to goal variable
+    public string GenerateGoalNumber()
 	{
 		Random randomGenerator = new Random();
 		string goal = "";
@@ -22,3 +23,4 @@ public class NumberGenerator : IGenerateNumber
 		return goal;
 	}
 }
+

@@ -17,10 +17,9 @@ public class Game : IGame
 		_numberGenerator = numberGenerator;
 	}
 
-    //Game Controller
-    //Logs the user's name and the amount of guesses (valid guesses with 4 unique digits) 
+    //Game controller, logs the user's name and the amount of guesses (valid guesses with 4 unique digits) 
     //until the user answers correctly and gets four B's. The result then gets saved on a text file locally
-    //and game shows the leaderboard and also asks the user with if they want to continue playing
+    //and game shows the leaderboard and also asks the user if they want to continue playing
 	public void Play()
 	{
 		_ui.WriteLine("Enter your name:");
@@ -34,15 +33,15 @@ public class Game : IGame
 
 			_ui.WriteLine("\nNew game (for practice, your number is " + goal + "):\n");
 
-			string guess = GetValidGuess();
-            int nGuess = 1;
+			string guess = CheckValidGuess();
+            int nGuess = 1; //variable name change?
 			string bbcc = CheckBullsAndCows(goal, guess);
 			_ui.WriteLine(bbcc + "\n");
 
 			while (bbcc != "BBBB,")
 			{
 				nGuess++;
-				guess = GetValidGuess();
+				guess = CheckValidGuess();
                 bbcc = CheckBullsAndCows(goal, guess);
 				_ui.WriteLine(bbcc + "\n");
 			}
@@ -58,6 +57,58 @@ public class Game : IGame
         }
 	}
 
+    //Game Logic, i and j loop iterates throuch each digit from the generated goal and guess input from the user
+    //Then a comparison between the digits in the two loops either adds an number increment to bulls or cows
+    //Then returns a construct of the two substrings to create a character combination of B's/comma/C's depending on the position of the iterated digits
+    private string CheckBullsAndCows(string goal, string guess)
+    {
+        int cows = 0, bulls = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (goal[i] == guess[j])
+                {
+                    if (i == j)
+                    {
+                        bulls++;
+                    }
+                    else
+                    {
+                        cows++;
+                    }
+                }
+            }
+        }
+        return "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
+    }
+
+    //Two way validation:
+    //Regex validates the user's input is exactly 4 digits long (with no other characters involved)
+    //Distinct and Count validates that the 4 digits are all unique 
+    private string CheckValidGuess()
+    {
+        bool IsValidGuess(string guess)
+        {
+            return Regex.IsMatch(guess, @"^\d{4}$") && guess.Distinct().Count() == 4;
+        }
+
+        while (true)
+        {
+            _ui.WriteLine("Enter your guess: ");
+            string guess = _ui.ReadLine();
+
+            if (IsValidGuess(guess))
+            {
+                return guess;
+            }
+            else
+            {
+                _ui.WriteLine("\nInvalid input. Please enter exactly 4 unique digits.");
+            }
+        }
+    }
     private bool AskToPlayAgain()
     {
         _ui.WriteLine("\nDo you want to play again?");
@@ -84,57 +135,4 @@ public class Game : IGame
         }
     }
 
-    private string GetValidGuess()
-    {
-        while (true)
-        {
-            _ui.WriteLine("Enter your guess: ");
-            string guess = _ui.ReadLine();
-
-            if (IsValidGuess(guess))
-            {
-                return guess;
-            }
-            else
-            {
-                _ui.WriteLine("\nInvalid input. Please enter exactly 4 unique digits.");
-            }
-        }
-    }
-
-    //Two way validation:
-    //Regex to validate the user's input is exactly 4 digits long (with no other characters involved)
-    //Distinct and Count validates that the input is 4 digits with unique numbers thus making sure no number is repeated
-    private bool IsValidGuess(string guess)
-    {
-        return Regex.IsMatch(guess, @"^\d{4}$") && guess.Distinct().Count() == 4; 
-    }
-
-    //Game Logic
-    //i and j loop iterates throuch each digit in the goal and guess
-    //Then a comparison between the digits in the two loops either adds an number increment to bulls and/or cows
-    //Then returns a construct of the two substrings to create a character combination of the two depending on the position of the iterated digits
-    private string CheckBullsAndCows(string goal, string guess)
-	{
-		int cows = 0, bulls = 0;
-
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				if (goal[i] == guess[j])
-				{
-					if (i == j)
-					{
-						bulls++;
-					}
-					else
-					{
-						cows++;
-					}
-				}
-			}
-		}
-		return "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
-	}
 }
