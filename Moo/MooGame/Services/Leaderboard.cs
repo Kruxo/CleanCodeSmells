@@ -3,7 +3,7 @@ using CleanCodeGaming.Models;
 
 namespace CleanCodeGaming.Services;
 
-//Reads and writes player data to a file
+//Reads and writes player data from and to a file 
 //Sorts and displays the leaderboard to the console
 public class Leaderboard : ILeaderboard
 {
