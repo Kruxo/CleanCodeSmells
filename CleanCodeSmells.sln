@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCodeGaming", "Moo\CleanCodeGaming.csproj", "{72D934AA-E8BD-4624-A387-FD764CC29D6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeGaming.UnitTests", "CleanCodeGaming.UnitTests\CleanCodeGaming.UnitTests.csproj", "{6E9680D0-3D39-47CE-9C29-40D46D917CDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{72D934AA-E8BD-4624-A387-FD764CC29D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72D934AA-E8BD-4624-A387-FD764CC29D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72D934AA-E8BD-4624-A387-FD764CC29D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9680D0-3D39-47CE-9C29-40D46D917CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9680D0-3D39-47CE-9C29-40D46D917CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9680D0-3D39-47CE-9C29-40D46D917CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9680D0-3D39-47CE-9C29-40D46D917CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,10 @@
-using CleanCodeGaming.Interfaces;
+using CleanCodeGaming.MooGame.Interfaces;
 
-namespace CleanCodeGaming.Services;
+namespace CleanCodeGaming.MooGame.Services;
 
 public class NumberGenerator : IGenerateNumber //Maybe change the class to GoalGenerator and method to NumberGenerator? Update: Keep it as it is in case future games need this class
 {
-    //Generates random digits up to 4 and adds it to goal variable
+    //Generates random digits up to 4 and adds it to the goal variable
     public string GenerateGoalNumber()
 	{
 		Random randomGenerator = new Random();
@@ -23,4 +23,3 @@ public class NumberGenerator : IGenerateNumber //Maybe change the class to GoalG
 		return goal;
 	}
 }
-

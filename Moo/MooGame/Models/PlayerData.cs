@@ -1,4 +1,4 @@
-namespace CleanCodeGaming.Models;
+namespace CleanCodeGaming.MooGame.Models;
 
 public class PlayerData
 {

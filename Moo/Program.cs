@@ -1,8 +1,7 @@
-﻿using CleanCodeGaming.Interfaces;
-using CleanCodeGaming.Services;
+﻿using CleanCodeGaming.MooGame.Interfaces;
+using CleanCodeGaming.MooGame.Services;
 
 namespace CleanCodeGaming;
-
 
 //Remember to go through all comments and reduce if possible
 //Remember to go through all naming of methods, variables... etc

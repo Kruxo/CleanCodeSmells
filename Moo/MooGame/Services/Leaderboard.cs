@@ -1,7 +1,7 @@
-using CleanCodeGaming.Interfaces;
-using CleanCodeGaming.Models;
+using CleanCodeGaming.MooGame.Interfaces;
+using CleanCodeGaming.MooGame.Models;
 
-namespace CleanCodeGaming.Services;
+namespace CleanCodeGaming.MooGame.Services;
 
 //Reads and writes player data from and to a file 
 //Sorts and displays the leaderboard to the console

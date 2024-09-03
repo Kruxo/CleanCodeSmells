@@ -1,4 +1,4 @@
-namespace CleanCodeGaming.Interfaces;
+namespace CleanCodeGaming.MooGame.Interfaces;
 
 public interface IGenerateNumber
 {

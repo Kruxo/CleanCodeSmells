@@ -1,7 +1,8 @@
-using CleanCodeGaming.Interfaces;
+using CleanCodeGaming.MooGame.Interfaces;
+
 using System.Text.RegularExpressions;
 
-namespace CleanCodeGaming.Services;
+namespace CleanCodeGaming.MooGame.Services;
 
 public class Game : IGame
 {
@@ -34,21 +35,21 @@ public class Game : IGame
 			_ui.WriteLine("\nNew game (for practice, your number is " + goal + "):\n");
 
 			string guess = CheckValidGuess();
-            int nGuess = 1; //variable name change?
+            int numberOfGuesses = 1; //variable name change?
 			string bbcc = CheckBullsAndCows(goal, guess);
 			_ui.WriteLine(bbcc + "\n");
 
 			while (bbcc != "BBBB,")
 			{
-				nGuess++;
+                numberOfGuesses++;
 				guess = CheckValidGuess();
                 bbcc = CheckBullsAndCows(goal, guess);
 				_ui.WriteLine(bbcc + "\n");
 			}
 
-            _ui.WriteLine("Correct, it took " + nGuess + " guesses\n");
+            _ui.WriteLine("Correct, it took " + numberOfGuesses + " guesses\n");
 
-            _leaderboard.SaveResult(_name, nGuess);
+            _leaderboard.SaveResult(_name, numberOfGuesses);
 			_leaderboard.ShowTopList();
 
             playOn = AskToPlayAgain();
@@ -60,7 +61,7 @@ public class Game : IGame
     //Game Logic, i and j loop iterates throuch each digit from the generated goal and guess input from the user
     //Then a comparison between the digits in the two loops either adds an number increment to bulls or cows
     //Then returns a construct of the two substrings to create a character combination of B's/comma/C's depending on the position of the iterated digits
-    private string CheckBullsAndCows(string goal, string guess)
+    public string CheckBullsAndCows(string goal, string guess)
     {
         int cows = 0, bulls = 0;
 
@@ -87,7 +88,7 @@ public class Game : IGame
     //Two way validation:
     //Regex validates the user's input is exactly 4 digits long (with no other characters involved)
     //Distinct and Count validates that the 4 digits are all unique 
-    private string CheckValidGuess()
+    public string CheckValidGuess()
     {
         bool IsValidGuess(string guess)
         {
@@ -109,7 +110,7 @@ public class Game : IGame
             }
         }
     }
-    private bool AskToPlayAgain()
+    public bool AskToPlayAgain()
     {
         _ui.WriteLine("\nDo you want to play again?");
         _ui.WriteLine("1: Yes");

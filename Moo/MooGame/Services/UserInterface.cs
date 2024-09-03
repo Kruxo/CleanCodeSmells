@@ -1,6 +1,6 @@
-using CleanCodeGaming.Interfaces;
+using CleanCodeGaming.MooGame.Interfaces;
 
-namespace CleanCodeGaming.Services;
+namespace CleanCodeGaming.MooGame.Services;
 
 public class UserInterface : IUserInterface
 {
