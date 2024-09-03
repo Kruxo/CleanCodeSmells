@@ -1,6 +1,6 @@
 namespace CleanCodeGaming.MooGame.Interfaces;
 
-public interface IGenerateNumber
+public interface IRandomGenerateNumber
 {
     string GenerateGoalNumber();
 }
